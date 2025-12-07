@@ -3,6 +3,7 @@ import { TinyColor } from '@ctrl/tinycolor';
 import type { FullToken, GenerateStyle } from '../../theme/internal';
 import { genComponentStyleHook, mergeToken } from '../../theme/internal';
 import genBorderedStyle from './bordered';
+import genDashedStyle from './dashed';
 import genEllipsisStyle from './ellipsis';
 import genEmptyStyle from './empty';
 import genExpandStyle from './expand';
@@ -254,6 +255,12 @@ const genTableStyle: GenerateStyle<TableToken, CSSObject> = token => {
         color: tableFooterTextColor,
         background: tableFooterBg,
       },
+      [`${componentCls}-no-header-split`]: {
+        [`${componentCls}-thead > tr > th:not(:last-child):not(${componentCls}-selection-column):not(${componentCls}-row-expand-icon-cell):not([colspan])::before`]:
+          {
+            display: 'none',
+          },
+      },
     },
   };
 };
@@ -362,6 +369,7 @@ export default genComponentStyleHook('Table', token => {
     genSorterStyle(tableToken),
     genFilterStyle(tableToken),
     genBorderedStyle(tableToken),
+    genDashedStyle(tableToken),
     genRadiusStyle(tableToken),
     genExpandStyle(tableToken),
     genSummaryStyle(tableToken),

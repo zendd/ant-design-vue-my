@@ -19,7 +19,7 @@ Ellipsis cell content via setting `column.ellipsis`.
 </docs>
 
 <template>
-  <a-table :columns="columns" :data-source="data">
+  <a-table :columns="columns" :data-source="data" dashed :show-header-split="false">
     <template #bodyCell="{ column, text }">
       <template v-if="column.dataIndex === 'name'">
         <a>{{ text }}</a>

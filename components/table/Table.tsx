@@ -100,6 +100,8 @@ export interface TableProps<RecordType = DefaultRecordType>
   loading?: boolean | SpinProps;
   size?: SizeType;
   bordered?: boolean;
+  dashed?: boolean;
+  showHeaderSplit?: boolean;
   locale?: TableLocale;
 
   onChange?: (
@@ -160,6 +162,8 @@ export const tableProps = () => {
     loading: someType<boolean | SpinProps>([Boolean, Object]),
     size: stringType<SizeType>(),
     bordered: booleanType(),
+    dashed: booleanType(),
+    showHeaderSplit: booleanType(true),
     locale: objectType<TableLocale>(),
 
     onChange:
@@ -615,6 +619,8 @@ const InternalTable = defineComponent({
                 [`${prefixCls.value}-middle`]: mergedSize.value === 'middle',
                 [`${prefixCls.value}-small`]: mergedSize.value === 'small',
                 [`${prefixCls.value}-bordered`]: bordered,
+                [`${prefixCls.value}-dashed`]: props.dashed,
+                [`${prefixCls.value}-no-header-split`]: props.showHeaderSplit === false,
                 [`${prefixCls.value}-empty`]: rawData.value.length === 0,
               })}
               data={pageData.value}
